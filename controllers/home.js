@@ -8,7 +8,7 @@ function index(req, res) {
     },
     html: () => {
       const htmlContent = fs.readFileSync(
-        path.resolve(__dirname, "../index.html"),
+        path.resolve(__dirname, "../home.html"),
         "utf-8"
       );
       res.type("html").send(htmlContent);
