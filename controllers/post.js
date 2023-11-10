@@ -17,6 +17,7 @@ function index(req, res) {
         );
       }
       html.push("<ul>");
+      res.send(html.join(""));
     },
     json: () => {
       res.type("json").send({
