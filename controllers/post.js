@@ -1,23 +1,32 @@
+const fs = require("fs");
+const path = require("path");
+
 const posts = require("../db/posts.json");
 
 function index(req, res) {
   res.format({
     html: () => {
-      const html = ["<h1>List Posts</h1>"];
-
-      html.push("<ul>");
+      let htmlContent = fs.readFileSync(
+        path.resolve(__dirname, "../posts.html"),
+        "utf-8"
+      );
+      let listContent = fs.readFileSync(
+        path.resolve(__dirname, "../list.html"),
+        "utf-8"
+      );
+      const postsHtml = [];
       for (const post of posts) {
-        html.push(
-          `<li>
-                <h3>${post.title}</h3>
-                <p>${post.content}</p>
-                <img src="/${post.image}" alt="image" style="width: 200px">
-                <p>${post.tags}</p>
-            </li>`
+        postsHtml.push(
+          listContent
+            .replace("@title", post.title)
+            .replace("@content", post.content)
+            .replace("@image", post.image)
+            .replace("@tags", post.tags)
         );
       }
-      html.push("<ul>");
-      res.send(html.join(""));
+
+      htmlContent = htmlContent.replace("@list", postsHtml.join(""));
+      res.type("html").send(htmlContent);
     },
     json: () => {
       res.type("json").send({
