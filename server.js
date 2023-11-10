@@ -1,4 +1,5 @@
 const express = require("express");
+const homeController = require("./controllers/home");
 
 /**
  * @param {express.Request} Req
