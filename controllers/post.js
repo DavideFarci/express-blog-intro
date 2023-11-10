@@ -17,6 +17,7 @@ function index(req, res) {
         "utf-8"
       );
 
+      // Costruisco il nuovo array con i post renderizzati
       const postsHtml = posts.map((post) =>
         // Sostituisco i placeholder(@) del componente con i valori dei post
         listContent
