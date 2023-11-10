@@ -11,6 +11,9 @@ dotenv.config();
 
 const app = express();
 
+// Configurazione file statici (immagini)
+app.use(express.static("public"));
+
 // Rotte
 app.get("/", homeController.index);
 app.get("/posts", postController.index);
