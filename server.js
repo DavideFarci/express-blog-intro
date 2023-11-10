@@ -1,10 +1,11 @@
 const express = require("express");
-const homeController = require("./controllers/home");
-
 /**
  * @param {express.Request} Req
  * @param {express.Response} Res
  */
+const homeController = require("./controllers/home");
+const postController = require("./controllers/post");
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -12,6 +13,7 @@ const app = express();
 
 // Rotte
 app.get("/", homeController.index);
+app.get("/posts", postController.index);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is running in port http://localhost:" + process.env.PORT);
