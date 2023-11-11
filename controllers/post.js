@@ -57,6 +57,9 @@ function index(req, res) {
         data: posts,
       });
     },
+    default: () => {
+      res.status(406).send("Not acceptable");
+    },
   });
 }
 
