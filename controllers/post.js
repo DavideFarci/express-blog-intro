@@ -8,12 +8,27 @@ function index(req, res) {
     html: () => {
       // leggo l'html della vista principale
       let htmlContent = fs.readFileSync(
-        path.resolve(__dirname, "../postList.html"),
+        path.resolve(__dirname, "../index.html"),
         "utf-8"
       );
+
+      // Creo degli arr con dentro il titolo e il corpo della vista
+      const title = [];
+      title.push(`I miei Post`);
+      const body = [];
+      body.push(`
+        <div class="container mx-auto py-2">
+          <h1 class="text-5xl font-bold text-center">Post List</h1>
+          <ul class="grid grid-cols-3 gap-8 py-12">
+            @post
+          </ul>
+        </div>
+      `);
+      const bodyStr = body.join("");
+
       // leggo l'html del componente singolo post
       let listContent = fs.readFileSync(
-        path.resolve(__dirname, "../post.html"),
+        path.resolve(__dirname, "../partials/post.html"),
         "utf-8"
       );
 
@@ -27,8 +42,13 @@ function index(req, res) {
           .replace("@tags", post.tags)
       );
 
-      // Trasformo l'array ottenuto in una striga e sostituisco il placeholder con la stringa
-      htmlContent = htmlContent.replace("@list", postsHtml.join(""));
+      // Aggiungo i post renderizzati al corpo
+      const postListHtml = bodyStr.replace("@post", postsHtml.join(""));
+
+      // Trasformo il titolo in una striga e sostituisco i placeholder con titolo e corpo
+      htmlContent = htmlContent
+        .replace("@title", title.join(""))
+        .replace("@body", postListHtml);
       // Mando la stringa al server (html)
       res.type("html").send(htmlContent);
     },
