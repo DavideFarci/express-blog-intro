@@ -18,7 +18,7 @@ function index(req, res) {
       const body = [];
       body.push(`
         <div class="container mx-auto py-2">
-          <h1 class="text-5xl font-bold text-center">Post List</h1>
+          <h1 class="text-5xl font-bold text-center">I miei Post</h1>
           <ul class="grid grid-cols-3 gap-8 py-12">
             @post
           </ul>
