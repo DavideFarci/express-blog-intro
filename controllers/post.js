@@ -24,7 +24,6 @@ function index(req, res) {
           </ul>
         </div>
       `);
-      const bodyStr = body.join("");
 
       // leggo l'html del componente singolo post
       let listContent = fs.readFileSync(
@@ -43,7 +42,7 @@ function index(req, res) {
       );
 
       // Aggiungo i post renderizzati al corpo
-      const postListHtml = bodyStr.replace("@post", postsHtml.join(""));
+      const postListHtml = body.join("").replace("@post", postsHtml.join(""));
 
       // Trasformo il titolo in una striga e sostituisco i placeholder con titolo e corpo
       htmlContent = htmlContent
