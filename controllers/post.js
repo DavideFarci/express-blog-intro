@@ -12,18 +12,15 @@ function index(req, res) {
         "utf-8"
       );
 
-      // Creo degli arr con dentro il titolo e il corpo della vista
-      const title = [];
-      title.push(`I miei Post`);
-      const body = [];
-      body.push(`
+      // Costruisco il corpo della vista dei post
+      const body = `
         <div class="container mx-auto py-2">
           <h1 class="text-5xl font-bold text-center">I miei Post</h1>
           <ul class="grid grid-cols-3 gap-8 py-12">
             @post
           </ul>
         </div>
-      `);
+      `;
 
       // leggo l'html del componente singolo post
       let listContent = fs.readFileSync(
@@ -42,11 +39,11 @@ function index(req, res) {
       );
 
       // Aggiungo i post renderizzati al corpo
-      const postListHtml = body.join("").replace("@post", postsHtml.join(""));
+      const postListHtml = body.replace("@post", postsHtml.join(""));
 
-      // Trasformo il titolo in una striga e sostituisco i placeholder con titolo e corpo
+      // Sostituisco i placeholder con titolo e corpo
       htmlContent = htmlContent
-        .replace("@title", title.join(""))
+        .replace("@title", "I miei Post")
         .replace("@body", postListHtml);
       // Mando la stringa al server (html)
       res.type("html").send(htmlContent);

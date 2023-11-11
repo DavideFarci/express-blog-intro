@@ -22,7 +22,7 @@ function index(req, res) {
         .replace("@title", "Il mio Blog")
         .replace("@body", body);
 
-      // Mando tutto alla vista
+      // Mando tutto al server
       res.type("html").send(htmlContent);
     },
     json: () => {
